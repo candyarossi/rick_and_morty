@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const DivCard = styled.div`
   display: inline-block;
-  background-color: darkslateblue;
+  background-color: rgb(72, 61, 139, 0.7);
   border-radius: 10px;
   color: white;
   overflow: hidden;
@@ -24,19 +24,19 @@ const Button = styled.button`
 `;
 
 const styleSpecie = {
-  display: 'inline-block',
-  fontSize: '16px',
-  color: 'violet',
-  marginRight: '15px',
-  marginTop: '-10px',
-}
+  display: "inline-block",
+  fontSize: "16px",
+  color: "violet",
+  marginRight: "15px",
+  marginTop: "-10px",
+};
 
 const styleGender = {
-  display: 'inline-block',
-  fontSize: '16px',
-  color: 'deeppink',
-  marginTop: '-10px',
-}
+  display: "inline-block",
+  fontSize: "16px",
+  color: "deeppink",
+  marginTop: "-10px",
+};
 
 // const styleName = {
 //   position: 'relative',
@@ -54,7 +54,7 @@ export default function Card(props) {
       <h2 style={styleSpecie}>{props.species}</h2>
       <h2 style={styleGender}>{props.gender}</h2>
       {/* <h2 style={styleName}>{props.name}</h2> */}
-      <img style={{display: 'block'}} src={props.image} alt="" /> 
+      <img style={{ display: "block" }} src={props.image} alt="" />
     </DivCard>
   );
 }

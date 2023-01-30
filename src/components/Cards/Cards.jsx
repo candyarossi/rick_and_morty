@@ -1,8 +1,9 @@
-import Card from "./Card";
+import Card from "../Card/Card";
 import styled from "styled-components";
 
 const DivCards = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-evenly;
 `;
 
@@ -17,7 +18,7 @@ export default function Cards(props) {
           species={e.species}
           gender={e.gender}
           image={e.image}
-          onClose={() => alert('Emulamos que se cierra la card')}
+          onClose={() => props.onClose(e.id)}
           key={i++}
         />
       ))}
