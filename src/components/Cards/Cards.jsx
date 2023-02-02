@@ -12,16 +12,23 @@ export default function Cards(props) {
   let i = 0;
   return (
     <DivCards>
-      {characters.map((e) => (
-        <Card
-          name={e.name}
-          species={e.species}
-          gender={e.gender}
-          image={e.image}
-          onClose={() => props.onClose(e.id)}
-          key={i++}
-        />
-      ))}
+      {characters.length === 0 ? (
+        <p style={{ color: "violet", marginTop: "150px", fontSize: "24px" }}>
+          ¡Busca un personaje!
+        </p>
+      ) : (
+        characters.map((e) => (
+          <Card
+            id={e.id}
+            name={e.name}
+            species={e.species}
+            gender={e.gender}
+            image={e.image}
+            onClose={() => props.onClose(e.id)}
+            key={i++}
+          />
+        ))
+      )}
     </DivCards>
   );
 }

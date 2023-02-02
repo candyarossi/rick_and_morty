@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const DivCard = styled.div`
   display: inline-block;
@@ -6,7 +7,7 @@ const DivCard = styled.div`
   border-radius: 10px;
   color: white;
   overflow: hidden;
-  margin: 25px 0px 25px 0px;
+  margin: 15px 0px;
 `;
 
 const Button = styled.button`
@@ -50,7 +51,9 @@ export default function Card(props) {
   return (
     <DivCard>
       <Button onClick={props.onClose}>X</Button>
-      <h2>{props.name}</h2>
+      <Link to={`/detail/${props.id}`} style={{textDecoration: 'none', color: 'white'}}>
+        <h2>{props.name}</h2>
+      </Link>
       <h2 style={styleSpecie}>{props.species}</h2>
       <h2 style={styleGender}>{props.gender}</h2>
       {/* <h2 style={styleName}>{props.name}</h2> */}

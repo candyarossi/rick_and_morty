@@ -16,6 +16,7 @@ const styleButton = {
   padding: "10px",
   margin: "25px 0px 25px 0px",
   marginRight: "15px",
+  cursor: 'pointer'
 };
 
 export default function SearchBar(props) {
@@ -30,7 +31,7 @@ export default function SearchBar(props) {
     <div>
       <input style={styleInput} type="search" onChange={handleSearch} />
       <button style={styleButton} onClick={() => props.onSearch(character)}>
-        Agregar
+        Add
       </button>
       <button style={styleButton} onClick={props.random}>
         Random Character
