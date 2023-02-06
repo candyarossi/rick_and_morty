@@ -17,6 +17,7 @@ export default function Nav(props) {
         <Link to="/about" className={style.links}>
           About
         </Link>
+        <button className={style.links} onClick={props.logout}>LogOut</button>
       </div>
       <SearchBar onSearch={props.onSearch} random={props.random} />
     </nav>
