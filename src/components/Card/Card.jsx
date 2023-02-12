@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { useState, useEffect } from "react";
+import { addFav, removeFav } from "../../redux/actions";
 
 const DivCard = styled.div`
   display: inline-block;
@@ -8,12 +11,10 @@ const DivCard = styled.div`
   color: white;
   overflow: hidden;
   margin: 15px 0px;
+  max-width: 18.8rem;
 `;
 
 const Button = styled.button`
-  position: relative;
-  right: -120px;
-  top: 10px;
   background-color: pink;
   color: purple;
   border: 0px;
@@ -22,6 +23,10 @@ const Button = styled.button`
   border-radius: 5px;
   font-weight: bold;
   font-size: 15px;
+  margin: 15px 15px 0px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const styleSpecie = {
@@ -47,11 +52,48 @@ const styleGender = {
 //   display: 'inline-block',
 // }
 
-export default function Card(props) {
+export function Card(props) {
+  const [isFav, setIsFav] = useState(props.fav);
+
+  useEffect(() => {
+    props.myFavorites &&
+      props.myFavorites.forEach((fav) => {
+        if (fav.id === props.id) {
+          setIsFav(true);
+        }
+      });
+  }, [props.myFavorites]);
+
+  function handleFavorite() {
+    if (isFav) {
+      setIsFav(false);
+      props.removeFav(props.id);
+    } else {
+      setIsFav(true);
+      props.addFav({
+        name: props.name,
+        species: props.species,
+        gender: props.gender,
+        image: props.image,
+        id: props.id,
+      });
+    }
+  }
+
   return (
     <DivCard>
-      <Button onClick={props.onClose}>X</Button>
-      <Link to={`/detail/${props.id}`} style={{textDecoration: 'none', color: 'white'}}>
+      <div style={{display: 'flex', justifyContent: 'space-between'}}>
+        {isFav ? (
+          <Button onClick={handleFavorite}>❤️</Button>
+        ) : (
+          <Button onClick={handleFavorite}>🤍</Button>
+        )}
+        {props.onClose && <Button onClick={props.onClose}>X</Button>}
+      </div>
+      <Link
+        to={`/detail/${props.id}`}
+        style={{ textDecoration: "none", color: "white" }}
+      >
         <h2>{props.name}</h2>
       </Link>
       <h2 style={styleSpecie}>{props.species}</h2>
@@ -61,3 +103,22 @@ export default function Card(props) {
     </DivCard>
   );
 }
+
+export function mapStateToProps(state) {
+  return {
+    myFavorites: state.myFavorites,
+  };
+}
+
+export function mapDispatchToProps(dispatch) {
+  return {
+    addFav: function (personaje) {
+      dispatch(addFav(personaje));
+    },
+    removeFav: function (id) {
+      dispatch(removeFav(id));
+    },
+  };
+}
+
+export default connect(null, mapDispatchToProps)(Card);
