@@ -18,8 +18,6 @@ export default function Form(props) {
     const name = e.target.name;
     setUserData({ ...userData, [name]: value });
     setErrors(validateInputs(userData));
-
-    console.log(errors);
   };
 
   const handleSubmit = (e) => {

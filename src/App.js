@@ -47,7 +47,6 @@ function App() {
 
   function random() {
     let randomId = Math.floor(Math.random() * 826);
-    console.log(randomId);
     onSearch(randomId);
   }
 

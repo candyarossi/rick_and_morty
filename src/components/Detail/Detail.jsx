@@ -50,7 +50,6 @@ export default function Detail() {
             origin: char.origin.name,
             image: char.image,
           });
-          console.log(character);
         } else {
           alert("No hay personajes con ese ID");
         }

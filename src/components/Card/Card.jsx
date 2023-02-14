@@ -62,7 +62,7 @@ export function Card(props) {
           setIsFav(true);
         }
       });
-  }, [props.myFavorites]);
+  });
 
   function handleFavorite() {
     if (isFav) {
@@ -82,7 +82,7 @@ export function Card(props) {
 
   return (
     <DivCard>
-      <div style={{display: 'flex', justifyContent: 'space-between'}}>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
         {isFav ? (
           <Button onClick={handleFavorite}>❤️</Button>
         ) : (
@@ -121,4 +121,4 @@ export function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(Card);
+export default connect(mapStateToProps, mapDispatchToProps)(Card);
