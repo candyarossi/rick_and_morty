@@ -31,16 +31,24 @@ const rootReducer = (state = initialState, action) => {
         ),
       };
     case ORDER:
-      let orderFavorites;
-      if (action.payload === "Ascendente") {
-        orderFavorites = state.myFavorites.sort((a, b) =>
-          a.id > b.id ? 1 : -1
-        );
-      } else {
-        orderFavorites = state.myFavorites.sort((a, b) =>
-          a.id < b.id ? 1 : -1
-        );
-      }
+      // let orderFavorites;
+      // if (action.payload === "Ascendente") {
+      //   orderFavorites = state.myFavorites.sort((a, b) =>
+      //     a.id > b.id ? 1 : -1
+      //   );
+      // } else {
+      //   orderFavorites = state.myFavorites.sort((a, b) =>
+      //     a.id < b.id ? 1 : -1
+      //   );
+      // }
+      let orderFunction = payload === "Ascendente"
+        ? (a, b) => {
+            return a.id > b.id ? 1 : -1;
+          }
+        : (a, b) => {
+            return a.id < b.id ? 1 : -1;
+          };
+      let orderFavorites = state.myFavorites.sort(orderFunction);
       return {
         ...state,
         myFavorites: [...orderFavorites],
