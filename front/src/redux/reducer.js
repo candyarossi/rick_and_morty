@@ -41,7 +41,7 @@ const rootReducer = (state = initialState, action) => {
       //     a.id < b.id ? 1 : -1
       //   );
       // }
-      let orderFunction = payload === "Ascendente"
+      let orderFunction = action.payload === "Ascendente"
         ? (a, b) => {
             return a.id > b.id ? 1 : -1;
           }
