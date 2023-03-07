@@ -33,10 +33,9 @@ function App() {
 
   function onSearch(character) {
     //fetch(`https://rickandmortyapi.com/api/character/${character}`)
-    fetch(`http://localhost:3001/rickandmorty/onsearch/${character}`)
+    fetch(`http://localhost:3001/onsearch/${character}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.name)
         if (data.name) {
           characters.find((element) => element.id === data.id) === undefined
             ? setCharacters((characters) => [...characters, data])
