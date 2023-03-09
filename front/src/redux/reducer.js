@@ -15,18 +15,13 @@ const rootReducer = (state = initialState, action) => {
         myFavorites: [...addFavorites],
       };
     case REMOVE_FAV:
-      // const deleteFavorites = state.allMyFavorites.filter(
-      //   (e) => e.id !== action.payload
-      // );
-      // return {
-      //   ...state,
-      //   allMyFavorites: [...deleteFavorites],
-      //   myFavorites: [...deleteFavorites],
-      // };
+      const deleteFavorites = state.allMyFavorites.filter(
+        (e) => e.id !== action.payload
+      );
       return {
         ...state,
-        allMyFavorites: [...action.payload],
-        myFavorites: [...action.payload],
+        allMyFavorites: [...deleteFavorites],
+        myFavorites: [...deleteFavorites],
       };
     case FILTER:
       return {

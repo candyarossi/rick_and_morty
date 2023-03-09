@@ -47,12 +47,9 @@ export function removeFav(id) {
         method: "DELETE",
       })
         .then((response) => response.json())
-        .then((data) =>
-          dispatch({
-            type: REMOVE_FAV,
-            payload: data,
-          })
-        );
+        .then((data) => {
+          if (data.success) dispatch({ type: REMOVE_FAV, payload: id });
+        });
     } catch (error) {
       console.log(error);
     }
