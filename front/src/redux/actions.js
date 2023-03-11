@@ -1,5 +1,6 @@
 export const ADD_FAV = "ADD_FAV";
 export const REMOVE_FAV = "REMOVE_FAV";
+export const GET_FAVS = "GET_FAVS";
 export const FILTER = "FILTER";
 export const ORDER = "ORDER";
 
@@ -20,20 +21,30 @@ export const ORDER = "ORDER";
 export function addFav(personaje) {
   return async function (dispatch) {
     try {
-      await fetch("http://localhost:3001/fav", {
+      // await fetch("http://localhost:3001/fav", {
+      //   method: "POST",
+      //   body: JSON.stringify(personaje),
+      //   headers: {
+      //     "Content-type": "application/json; charset=UTF-8",
+      //   },
+      // })
+      //   .then((response) => response.json())
+      //   .then((data) =>
+      //     dispatch({
+      //       type: ADD_FAV,
+      //       payload: data,
+      //     })
+      //   );
+
+      const data = await fetch("http://localhost:3001/fav", {
         method: "POST",
         body: JSON.stringify(personaje),
         headers: {
           "Content-type": "application/json; charset=UTF-8",
         },
-      })
-        .then((response) => response.json())
-        .then((data) =>
-          dispatch({
-            type: ADD_FAV,
-            payload: data,
-          })
-        );
+      }).then((response) => response.json());
+
+      if (data) dispatch({ type: ADD_FAV, payload: data });
     } catch (error) {
       console.log(error);
     }
@@ -43,13 +54,33 @@ export function addFav(personaje) {
 export function removeFav(id) {
   return async function (dispatch) {
     try {
-      await fetch(`http://localhost:3001/fav/${id}`, {
+      // await fetch(`http://localhost:3001/fav/${id}`, {
+      //   method: "DELETE",
+      // })
+      //   .then((response) => response.json())
+      //   .then((data) => {
+      //     if (data.success) dispatch({ type: REMOVE_FAV, payload: id });
+      //   });
+
+      const data = await fetch(`http://localhost:3001/fav/${id}`, {
         method: "DELETE",
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.success) dispatch({ type: REMOVE_FAV, payload: id });
-        });
+      }).then((response) => response.json());
+
+      if (data.success) dispatch({ type: REMOVE_FAV, payload: id });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function getFavs() {
+  return async function (dispatch) {
+    try {
+      const data = await fetch(`http://localhost:3001/fav/`).then((response) =>
+        response.json()
+      );
+
+      if (data) dispatch({ type: GET_FAVS, payload: data });
     } catch (error) {
       console.log(error);
     }
