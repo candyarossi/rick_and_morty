@@ -8,16 +8,27 @@ describe("Test de RUTAS", () => {
       agent.get("/onsearch/1").expect(200);
     });
     it('Responde un objeto con las propiedades: "id", "name", "species", "gender" e "image"', () => {
-      const res = agent.get("/onsearch/1");
+      // const res = await agent.get("/onsearch/1")
+      //   const keys = Object.keys(res.body);
+      //   expect(keys).toContain("id");
+      //   expect(keys).toContain("name");
+      //   expect(keys).toContain("species");
+      //   expect(keys).toContain("gender");
+      //   expect(keys).toContain("image");
 
-      console.log(res);
+      //   expect.assertions(1);
+
+      return agent.get("/onsearch/1")
+      .then(function (res) {
+        const keys = Object.keys(res.body);
+        expect(keys).toContain("id");
+        expect(keys).toContain("name");
+        expect(keys).toContain("species");
+        expect(keys).toContain("gender");
+        expect(keys).toContain("image");
+      })
+
       
-         const objKeys = Object.keys(res.data);
-         expect(objKeys).toContain('id');
-      //    expect(objKeys).toContain('name');
-      //    expect(objKeys).toContain('species');
-      //    expect(objKeys).toContain('gender');
-      //    expect(objKeys).toContain('image');
     });
     it("Si hay un error responde con status: 500", () => {
       agent.get("/onsearch/IDqueNoExiste").expect(500);
